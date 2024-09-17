@@ -1,0 +1,134 @@
+import java.util.Scanner;
+
+public class RadixCalculator {
+    public static void main(String[] args) {
+        Scanner myInput = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Choose an option:");
+            System.out.println("1. Convert numbers between different bases");
+            System.out.println("2. Perform arithmetic operations on numbers in different bases");
+            System.out.println("Type STOP to terminate the program");
+
+            String choice = myInput.nextLine().trim().toUpperCase();
+
+            if (choice.equals("STOP")) {
+                System.out.println("Program Terminated");
+                break;
+            } else if (choice.equals("1")) {
+                handleBaseConversion(myInput);
+            } else if (choice.equals("2")) {
+                handleArithmeticOperations(myInput);
+            } else {
+                System.out.println("Error! Choice is not in the list! Choose an existing option.");
+            }
+        }
+    }
+
+    private static void handleBaseConversion(Scanner myInput) {
+        System.out.println("Choose a number system to convert from:");
+        System.out.println("1. Binary Number System");
+        System.out.println("2. Decimal Number System");
+        System.out.println("3. Octal Number System");
+        System.out.println("4. Hexadecimal Number System");
+
+        String choice = myInput.nextLine().trim();
+
+        switch (choice) {
+            case "1":
+                convertFromBase(myInput, 2, "binary");
+                break;
+            case "2":
+                convertFromBase(myInput, 10, "decimal");
+                break;
+            case "3":
+                convertFromBase(myInput, 8, "octal");
+                break;
+            case "4":
+                convertFromBase(myInput, 16, "hexadecimal");
+                break;
+            default:
+                System.out.println("Error! Choice is not in the list!");
+                break;
+        }
+    }
+
+    private static void convertFromBase(Scanner myInput, int base, String baseName) {
+        System.out.println("You have chosen " + baseName + " Number System");
+        System.out.println("Enter a " + baseName + " number to convert:");
+
+        String number = myInput.nextLine().trim();
+
+        try {
+            int decimalValue = Integer.parseInt(number, base);
+            System.out.println("Your " + baseName + " number " + number + " is converted to:");
+            System.out.println("Decimal: " + decimalValue);
+            System.out.println("Binary: " + Integer.toBinaryString(decimalValue));
+            System.out.println("Octal: " + Integer.toOctalString(decimalValue));
+            System.out.println("Hexadecimal: " + Integer.toHexString(decimalValue).toUpperCase());
+        } catch (NumberFormatException nfe) {
+            System.out.println("Error! Not a valid " + baseName + " number.");
+        }
+    }
+
+    private static void handleArithmeticOperations(Scanner myInput) {
+        System.out.println("Enter the base of the numbers you want to work with (2 for binary, 10 for decimal, 8 for octal, 16 for hexadecimal):");
+        int base = 0;
+        try {
+            base = Integer.parseInt(myInput.nextLine().trim());
+            if (base != 2 && base != 8 && base != 10 && base != 16) {
+                System.out.println("Error! Unsupported base.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error! Invalid base input.");
+            return;
+        }
+
+        System.out.println("Enter the first number in base " + base + ":");
+        String num1 = myInput.nextLine().trim();
+
+        System.out.println("Enter the second number in base " + base + ":");
+        String num2 = myInput.nextLine().trim();
+
+        System.out.println("Choose an operation: +, -, *, /");
+        String operation = myInput.nextLine().trim();
+
+        try {
+            int val1 = Integer.parseInt(num1, base);
+            int val2 = Integer.parseInt(num2, base);
+            int result;
+            String resultBase;
+
+            switch (operation) {
+                case "+":
+                    result = val1 + val2;
+                    resultBase = Integer.toString(result, base).toUpperCase();
+                    break;
+                case "-":
+                    result = val1 - val2;
+                    resultBase = Integer.toString(result, base).toUpperCase();
+                    break;
+                case "*":
+                    result = val1 * val2;
+                    resultBase = Integer.toString(result, base).toUpperCase();
+                    break;
+                case "/":
+                    if (val2 == 0) {
+                        System.out.println("Error! Division by zero.");
+                        return;
+                    }
+                    result = val1 / val2;
+                    resultBase = Integer.toString(result, base).toUpperCase();
+                    break;
+                default:
+                    System.out.println("Error! Unsupported operation.");
+                    return;
+            }
+
+            System.out.println("The result of " + num1 + " " + operation + " " + num2 + " in base " + base + " is: " + resultBase);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Error! Invalid number format.");
+        }
+    }
+}

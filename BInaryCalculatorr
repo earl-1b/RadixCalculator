@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class BinaryCalculatorr {
+    
+    // Method to perform binary addition
+    public static String binaryAddition(String a, String b) {
+        int num1 = Integer.parseInt(a, 2);
+        int num2 = Integer.parseInt(b, 2);
+        int sum = num1 + num2;
+        return Integer.toBinaryString(sum);
+    }
+
+    // Method to perform binary subtraction
+    public static String binarySubtraction(String a, String b) {
+        int num1 = Integer.parseInt(a, 2);
+        int num2 = Integer.parseInt(b, 2);
+        int difference = num1 - num2;
+        return Integer.toBinaryString(difference);
+    }
+
+    // Method to perform binary multiplication
+    public static String binaryMultiplication(String a, String b) {
+        int num1 = Integer.parseInt(a, 2);
+        int num2 = Integer.parseInt(b, 2);
+        int product = num1 * num2;
+        return Integer.toBinaryString(product);
+    }
+
+    // Method to perform binary division
+    public static String binaryDivision(String a, String b) {
+        int num1 = Integer.parseInt(a, 2);
+        int num2 = Integer.parseInt(b, 2);
+        if (num2 == 0) {
+            return "Error: Division by zero";
+        }
+        int quotient = num1 / num2;
+        return Integer.toBinaryString(quotient);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Binary Calculator");
+        System.out.println("Enter two binary numbers:");
+
+        String a = scanner.nextLine();
+        String b = scanner.nextLine();
+
+        System.out.println("Choose an operation: +, -, *, /");
+        char operation = scanner.nextLine().charAt(0);
+
+        String result;
+
+        switch (operation) {
+            case '+':
+                result = binaryAddition(a, b);
+                break;
+            case '-':
+                result = binarySubtraction(a, b);
+                break;
+            case '*':
+                result = binaryMultiplication(a, b);
+                break;
+            case '/':
+                result = binaryDivision(a, b);
+                break;
+            default:
+                result = "Invalid operation";
+        }
+
+        System.out.println("Result: " + result);
+        scanner.close();
+    }
+}

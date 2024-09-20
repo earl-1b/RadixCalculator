@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class BasicCalculator {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter first number. ");
+        int userInput1 = sc.nextInt();
+        System.out.println("Enter second number. ");
+        int userInput2 = sc.nextInt();
+        
+        int sum = userInput1 + userInput2;
+        int diff = userInput1 - userInput2;
+        int prod = userInput1 * userInput2;
+        int quo = userInput1 / userInput2;
+        int rem = userInput1 % userInput2;
+        
+        
+        System.out.println("the sum is " + sum);
+        System.out.println("the diff is " + diff);
+        System.out.println("the prod is " + prod); 
+        System.out.println("the quo is " + quo); 
+        System.out.println("the rem is " + rem); 
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+}
